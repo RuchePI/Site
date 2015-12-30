@@ -1,0 +1,22 @@
+/**
+ * RuchePI
+ * Main style file
+ */
+
+// Variables
+@import "variables/variables";
+
+// Normalize
+@import "vendors/normalize";
+
+// Icons
+@import "vendors/font-awesome";
+
+// Base
+@import "base/base";
+@import "base/forms";
+@import "base/tables";
+
+// Layout
+@import "layout/header";
+@import "layout/content";

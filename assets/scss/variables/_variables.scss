@@ -1,0 +1,18 @@
+$color-primary: #222d32;
+$color-secondary: #ffe245;
+$color-tertiary: #3c8dbc;
+
+$color-text-on-white: #333;
+$color-text-on-black: lighten($color-primary, 60%);
+
+$font-sans-serif: "Open Sans", Helvetica, Arial, sans-serif;
+$font-monospace: "Source Code Pro", monospace;
+
+$media-large: "(min-width: 1281px)";
+$media-desktop: "(min-width: 760px)";
+$media-mobile: "(max-width: 759px)";
+
+$transition-duration: .15s;
+$transition-mobile-menu: all .2s ease;
+
+$sidebar-width: 200px;

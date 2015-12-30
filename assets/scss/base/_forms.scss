@@ -1,0 +1,53 @@
+form {
+    div+div {
+        margin-top: 15px;
+    }
+}
+
+label {
+    display: block;
+    font-weight: bold;
+}
+
+input[type=text],
+input[type=password],
+input[type=number] {
+    display: inline-block;
+    border: none medium #fff;
+    border-bottom: 1px solid #ddd;
+    border-radius: 0;
+    background-color: transparent;
+    height: 35px;
+    transition: all $transition-duration ease;
+
+    &:hover,
+    &:focus {
+        border-bottom: 1px solid $color-secondary;
+    }
+}
+
+input[type=number] {
+    padding: 5px;
+    border: 1px solid #ddd;
+
+    &:hover,
+    &:focus {
+        border: 1px solid $color-secondary;
+    }
+}
+
+button {
+    display: block;
+    margin-top: 10px;
+    padding: 10px;
+    border: none medium #fff;
+    border-radius: 0;
+    background-color: #ffe246; // $color-secondary, but bug!
+    cursor: pointer;
+    transition: all $transition-duration ease;
+
+    &:hover {
+        background-color: $color-tertiary;
+        color: #fff;
+    }
+}

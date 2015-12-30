@@ -1,0 +1,43 @@
+table {
+    thead {
+        border-bottom: 1px solid $color-primary;
+
+        .columns-names {
+            font-weight: bold;
+        }
+    }
+
+    td {
+        padding: 5px;
+        text-align: center;
+    }
+
+    tbody tr {
+        transition: all $transition-duration ease;
+
+        &:hover {
+            background-color: lighten($color-tertiary, 40%);
+        }
+    }
+
+    form {
+        display: inline-block;
+
+        .delete {
+            color: initial;
+            margin: 0;
+            padding: 0;
+            background-color: transparent;
+            transition: all $transition-duration ease;
+
+            &::after {
+                content: "\f1f8";
+                font-family: "FontAwesome";
+            }
+
+            &:hover {
+                color: #dd4b39;
+            }
+        }
+    }
+}

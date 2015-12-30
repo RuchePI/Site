@@ -1,0 +1,66 @@
+* {
+    box-sizing: border-box;
+}
+
+::selection {
+    background-color: $color-secondary;
+}
+
+html {
+    height: 100%;
+    width: 100%;
+    overflow-x: hidden;
+    word-wrap: break-word;
+}
+
+html,
+body,
+button,
+input {
+    font-family: $font-sans-serif;
+    font-size: 14px;
+    color: $color-text-on-white;
+}
+
+code,
+pre,
+samp {
+    font-family: $font-monospace;
+}
+
+body,
+.page-container {
+    position: absolute;
+    min-height: 100%;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+}
+
+a {
+    color: $color-tertiary;
+    text-decoration: none;
+    transition: all $transition-duration ease;
+
+    &:hover {
+        color: $color-primary;
+    }
+}
+
+p {
+    margin: 0 0 1ex 0;
+    line-height: 1.6;
+}
+
+@media only screen and #{$media-desktop} {
+    .col-2 {
+        float: left;
+        width: 50%;
+    }
+
+    .col-3 {
+        float: left;
+        width: 33.333%;
+    }
+}

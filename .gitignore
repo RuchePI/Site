@@ -1,0 +1,17 @@
+# Front files
+/assets/fonts
+/assets/scss/vendors
+/assets/css
+/assets/js/vendors
+/assets/js/all.js
+/assets/js/all.min.js
+
+# NPM
+node_modules
+npm-debug.log
+
+# Python
+*.pyc
+
+# Django
+base.db

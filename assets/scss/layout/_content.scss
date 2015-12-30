@@ -1,0 +1,145 @@
+main {
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: $sidebar-width;
+    right: 0;
+    bottom: 0;
+    overflow: auto;
+    background-color: #fafafa;
+}
+
+.content-header {
+    background-color: $color-tertiary;
+    color: #fff;
+
+    h1 {
+        font-weight: 300;
+        font-size: 28px;
+        margin: 0;
+        padding: .5rem 1rem;
+
+        i.fa {
+            margin-right: 10px;
+        }
+    }
+}
+
+.page-content {
+    padding: 1em;
+
+    h2 {
+        font-weight: normal;
+        color: #555;
+
+        &::before {
+            content: "›";
+            padding-right: 5px;
+        }
+
+        &:first-of-type {
+            margin-top: 0;
+        }
+    }
+}
+
+.full-width {
+    width: calc(100% + 2em);
+    margin: 1rem -1em;
+}
+
+@media only screen and #{$media-large} {
+    .page-content {
+        width: 1080px;
+        margin: auto;
+    }
+}
+
+.sumary {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: -15px;
+
+    .info {
+        flex: auto;
+        display: flex;
+        margin-top: 15px;
+
+        .info-icon {
+            flex: 0 0 36px;
+            font-size: 2em;
+            margin-right: 15px;
+            text-align: right;
+        }
+
+        .info-content {
+            flex: 1;
+
+            .info-text {
+                font-weight: bold;
+                display: block;
+            }
+        }
+    }
+}
+
+.pagination {
+    list-style-type: none;
+    margin-top: 40px;
+    padding-top: .5em;
+    border-top: 2px solid $color-primary;
+    text-align: center;
+
+    li {
+        display: inline-block;
+
+        a {
+            color: inherit;
+            padding: .5em;
+            border-bottom: 2px solid transparent;
+            transition: all $transition-duration ease;
+
+            &.current {
+                border-bottom-color: $color-secondary;
+            }
+
+            &:hover {
+                border-bottom-color: #ddd;
+            }
+        }
+    }
+}
+
+@media only screen and #{$media-mobile} {
+    main {
+        transition: $transition-mobile-menu;
+        left: 0;
+    }
+
+    .show-mobile-menu main {
+        opacity: .5;
+    }
+
+    .content-header h1 {
+        font-size: 25px;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }
+
+    .sumary {
+        .info {
+            min-width: 50%;
+            max-width: 50%;
+
+            &:nth-child(2n) + .info {
+                &,
+                + .info {
+                    margin-top: 5px;
+                }
+
+                border-left: medium none #fff;
+            }
+        }
+    }
+}
