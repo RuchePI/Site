@@ -16,7 +16,7 @@ var paths = {
         "node_modules/normalize.css/normalize.css",
         "node_modules/font-awesome/css/font-awesome.css"
     ],
-    vendorsJS : [
+    vendorsJS: [
         "node_modules/jquery/dist/jquery.js"
     ],
     vendorsFonts: [
@@ -111,7 +111,7 @@ gulp.task("watch", function () {
         .on("change", function (event) {
             $.livereload.changed(event.path);
         });
-    
+
     $.livereload.listen();
 });
 
