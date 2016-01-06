@@ -110,6 +110,37 @@ main {
     }
 }
 
+.token {
+    display: inline-block;
+    max-width: 500px;
+    overflow: hidden;
+    white-space: pre;
+    line-height: 10px;
+    transition: all $transition-duration linear;
+
+    &:not(.show) {
+        max-width: 0;
+
+        + .token-button {
+            margin: 0;
+        }
+    }
+
+    &-button {
+        display: inline;
+        margin: 0 0 0 10px;
+        padding: 5px 7px;
+        background-color: #dd4b39;
+        color: #fff;
+
+        &::before {
+            content: "\f084";
+            font-family: "FontAwesome";
+            padding-right: 6px;
+        }
+    }
+}
+
 @media only screen and #{$media-mobile} {
     main {
         transition: $transition-mobile-menu;
