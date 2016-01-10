@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block page_title %}Créer un compte{% endblock %}
+
+{% block title_icon %}user-plus{% endblock %}
+
+{% block title %}Créer un compte{% endblock %}
+
+{% block content %}
+    {% if not user.is_authenticated %}
+        {% if error %}
+             {{ error }}
+        {% endif %}
+
+        <form method="post" action=".">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Créer</button>
+        </form>
+    {% else %}
+        <p>Vous êtes déjà connecté <strong>{{ user.username }}</strong> !</p>
+    {% endif %}
+{% endblock %}

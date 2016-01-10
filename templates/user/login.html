@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block page_title %}Se connecter{% endblock %}
+
+{% block title_icon %}sign-in{% endblock %}
+
+{% block title %}Se connecter{% endblock %}
+
+{% block content %}
+    {% if error %}
+        <ul class="errorlist">
+            <li>Utilisateur inexistant ou mot de passe invalide.</li>
+        </ul>
+    {% endif %}
+
+    {% if user.is_authenticated %}
+        <p>Vous êtes déjà connecté <strong>{{ user.username }}</strong> !</p>
+    {% else %}
+        <form method="post" action=".">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Connexion</button>
+        </form>
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block page_title %}Compte créé{% endblock %}
+
+{% block title_icon %}check{% endblock %}
+
+{% block title %}Compte créé{% endblock %}
+
+{% block content %}
+    <p>Votre compte a bien été créé, <a href="{% url 'rpi.user.views.login_view' %}">connectez-vous</a>.</p>
+{% endblock %}

@@ -79,19 +79,20 @@ DATABASES = {
 
 AUTH_PASSWORD_VALIDATORS = [
     {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',  # noqa
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',  # noqa
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
+        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',  # noqa
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
+        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',  # noqa
     },
 ]
 
+LOGIN_URL = '/utilisateurs/connexion/'
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.9/topics/i18n/
@@ -121,7 +122,9 @@ STATICFILES_DIRS = (
 
 RPI_APP = {
     'name': u"RuchePI",
-    'description': u"RuchePI est un dispositif qui permet à l'apiculteur de connaître à distance les conditions intérieures et extérieures de ses ruches.",
+    'description': u"RuchePI est un dispositif qui permet à l'apiculteur de "
+                   u"connaître à distance les conditions intérieures et "
+                   u"extérieures de ses ruches.",
     'abbr': u"rpi",
     'domain': u"ruchepi.xyz",
     'repository': u"https://github.com/RuchePI/Site",

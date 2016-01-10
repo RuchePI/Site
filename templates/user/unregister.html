@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block page_title %}Supprimer mon compte{% endblock %}
+
+{% block title_icon %}user-times{% endblock %}
+
+{% block title %}Supprimer mon compte{% endblock %}
+
+{% block content %}
+    <p>Êtes-vous sûr de vouloir supprimer votre compte <strong>{{ user.username }}</strong> ? Cela implique les éléments suivants.</p>
+
+    <ul>
+        <li>Votre compte sera supprimé et il ne sera pas possible de le récupérer.</li>
+        <li>Vos ruches ainsi que leurs données seront perdues. Nous vous invitons à les exporter.</li>
+    </ul>
+
+    <p><a class="btn critical" href="{% url 'rpi.user.views.unregister_view' %}">Me désinscrire</a></p>
+{% endblock %}
