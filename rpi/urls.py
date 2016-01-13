@@ -8,7 +8,7 @@ import rpi.user.urls
 
 
 urlpatterns = [
-    url(r'^$', rpi.pages.views.home),
+    url(r'^$', rpi.pages.views.home, name='home'),
     url(r'utilisateurs/', include('rpi.user.urls')),
     url(r'^admin/', admin.site.urls),
 ]

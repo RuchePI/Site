@@ -130,7 +130,7 @@ RPI_APP = {
     'repository': u"https://github.com/RuchePI/Site",
 }
 
-# Load the production setting
+# Load the production settings
 try:
     from settings_prod import *
 except ImportError:

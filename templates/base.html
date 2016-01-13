@@ -25,13 +25,13 @@
         <div class="page-container" id="page">
             <header class="page-header">
                 <div class="header-logo">
-                    <a class="header-logo-link" href="{% url 'rpi.pages.views.home' %}">
+                    <a class="header-logo-link" href="{% url 'home' %}">
                         <img src="{% static 'img/logo.svg' %}" alt="Logo">{{ app.name }}
                     </a>
                 </div>
                 <nav class="header-menu">
                     <ul class="main-nav">
-                        <li><a href="{% url 'rpi.pages.views.home' %}"><i class="fa fa-home"></i>Accueil</a></li>
+                        <li><a href="{% url 'home' %}"><i class="fa fa-home"></i>Accueil</a></li>
                         <li>
                             <a href="#" class="has-dropdown"><i class="fa fa-forumbee"></i>Ruche 1<i class="visibility fa fa-unlock"></i></a>
                             <ul class="dropdown">
@@ -56,14 +56,14 @@
                             <li>
                                 <a href="#" class="has-dropdown"><i class="fa fa-gears"></i>Paramètres</a>
                                 <ul class="dropdown">
-                                    <li><a href="{% url 'rpi.user.views.new_password_view' %}"><i class="fa fa-key"></i>Mot de passe</a></li>
-                                    <li><a href="{% url 'rpi.user.views.warning_unregister_view' %}"><i class="fa fa-user-times"></i>Supprimer</a></li>
+                                    <li><a href="{% url 'new-password' %}"><i class="fa fa-key"></i>Mot de passe</a></li>
+                                    <li><a href="{% url 'warning-unregister' %}"><i class="fa fa-user-times"></i>Supprimer</a></li>
                                 </ul>
                             </li>
-                            <li><a href="{% url 'rpi.user.views.logout_view' %}"><i class="fa fa-sign-out"></i>Déconnexion</a></li>
+                            <li><a href="{% url 'logout' %}"><i class="fa fa-sign-out"></i>Déconnexion</a></li>
                         {% else %}
                             <li><a href="{% url 'register-user' %}"><i class="fa fa-user-plus"></i>Créer un compte</a></li>
-                            <li><a href="{% url 'rpi.user.views.login_view' %}"><i class="fa fa-sign-in"></i>Connexion</a></li>
+                            <li><a href="{% url 'login' %}"><i class="fa fa-sign-in"></i>Connexion</a></li>
                         {% endif %}
                         <li><a href="#"><i class="fa fa-question-circle"></i>À propos</a></li>
                     </ul>

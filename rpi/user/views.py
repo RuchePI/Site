@@ -26,7 +26,7 @@ def login_view(request):
                 login(request, user)
 
                 # Redirect user to the home.
-                return redirect(reverse('rpi.pages.views.home'))
+                return redirect(reverse('home'))
             else:
                 error = True
     else:
@@ -40,7 +40,7 @@ def logout_view(request):
 
     logout(request)
     request.session.clear()
-    return redirect(reverse('rpi.pages.views.home'))
+    return redirect(reverse('home'))
 
 
 class RegisterView(CreateView):
@@ -57,7 +57,7 @@ class RegisterView(CreateView):
         return render(request, self.template_name, {'form': form})
 
     def form_valid(self, form):
-        user = User.objects.create_user(
+        User.objects.create_user(
             username=form.data.get('username'),
             password=form.data.get('password'),
         )
@@ -103,4 +103,4 @@ def unregister_view(request):
     else:
         return render(request, 'user/unregister_fail.html')
 
-    return redirect(reverse('rpi.pages.views.home'))
+    return redirect(reverse('home'))

@@ -47,7 +47,7 @@ python3 manage.py runserver
 ## Bonnes pratiques
 
 * L'indentation est uniquement réalisée avec 4 espaces et non des tabulations.
-* Respectez [les conventions de codes de Django](https://docs.djangoproject.com/en/1.9/internals/contributing/writing-code/coding-style/), ce qui inclut la [PEP 008](https://www.python.org/dev/peps/pep-0008/) (sauf l'erreur E501 pour le dépassement des 80 caractères).
+* Respectez [les conventions de codes de Django](https://docs.djangoproject.com/en/1.9/internals/contributing/writing-code/coding-style/), ce qui inclut la [PEP 008](https://www.python.org/dev/peps/pep-0008/) (sauf l'erreur E501 pour le dépassement des 80 caractères). Veuillez donc utiliser l'outil `flake8`.
 * Vérifier qu'il n'y est pas d'indentations inutiles et d'espaces en fin de ligne.
 ```
 ./tools/find_trailing_spaces.sh
