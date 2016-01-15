@@ -1,4 +1,5 @@
 {% load static %}
+{% load header %}
 
 <!DOCTYPE html>
 <html lang="fr">
@@ -32,16 +33,46 @@
                 <nav class="header-menu">
                     <ul class="main-nav">
                         <li><a href="{% url 'home' %}"><i class="fa fa-home"></i>Accueil</a></li>
-                        <li>
-                            <a href="#" class="has-dropdown"><i class="fa fa-forumbee"></i>Ruche 1<i class="visibility fa fa-unlock"></i></a>
-                            <ul class="dropdown">
-                                <li><a href="#"><i class="fa fa-th"></i>Résumé</a></li>
-                                <li><a href="#"><i class="fa fa-table"></i>Données</a></li>
-                                <li><a href="#"><i class="fa fa-line-chart"></i>Graphiques</a></li>
-                                <li><a href="#"><i class="fa fa-pencil"></i>Modifier</a></li>
-                                <li><a href="#"><i class="fa fa-trash"></i>Supprimer</a></li>
-                            </ul>
-                        </li>
+                        {% with beehives=user|beehives %}
+
+                            {# Personnal beehives. #}
+                            <h2>Vos ruches</h2>
+                            {% for b in beehives.personnal %}
+                                <li>
+                                    <a href="#" class="has-dropdown"><i class="fa fa-forumbee"></i>{{ b.name }}<i class="visibility fa fa-{% if not b.public %}un{% endif %}lock"></i></a>
+                                    <ul class="dropdown">
+                                        <li><a href="#"><i class="fa fa-th"></i>Résumé</a></li>
+                                        <li><a href="#"><i class="fa fa-table"></i>Données</a></li>
+                                        <li><a href="#"><i class="fa fa-line-chart"></i>Graphiques</a></li>
+                                        <li><a href="#"><i class="fa fa-pencil"></i>Modifier</a></li>
+                                        <li><a href="#"><i class="fa fa-trash"></i>Supprimer</a></li>
+                                    </ul>
+                                </li>
+                            {% empty %}
+                                <li><a href="#">Aucune ruche à vous.</a></li>
+                            {% endfor %}
+
+                            {# Public beehives. #}
+                            <h2>Autres ruches publques</h2>
+                            {% for b in beehives.public %}
+                                <li>
+                                    <a href="#" class="has-dropdown"><i class="fa fa-forumbee"></i>{{ b.name }}{% if user.is_superuser %}<i class="visibility fa fa-{% if not b.public %}un{% endif %}lock"></i>{% endif %}</a>
+                                    <ul class="dropdown">
+                                        <li><a href="#"><i class="fa fa-th"></i>Résumé</a></li>
+                                        <li><a href="#"><i class="fa fa-table"></i>Données</a></li>
+                                        <li><a href="#"><i class="fa fa-line-chart"></i>Graphiques</a></li>
+                                        {% if user.is_superuser %}
+                                            <li><a href="#"><i class="fa fa-pencil"></i>Modifier</a></li>
+                                            <li><a href="#"><i class="fa fa-trash"></i>Supprimer</a></li>
+                                        {% endif %}
+                                    </ul>
+                                </li>
+                            {% empty %}
+                                <li>
+                                    <a href="#">Aucune ruche publique.</a>
+                                </li>
+                            {% endfor %}
+                        {% endwith %}
                         {% if user.is_authenticated %}
                             <li><a href="#"><i class="fa fa-plus"></i>Ajouter une ruche</a></li>
                         {% endif %}
@@ -49,7 +80,7 @@
                 </nav>
                 <div class="sub-header">
                     {% if user.is_authenticated %}
-                        <p class="my-account">{{ user.username }}</p>
+                        <h2>{{ user.username }}</h2>
                     {% endif %}
                     <ul class="secondary-nav">
                         {% if user.is_authenticated %}

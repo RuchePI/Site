@@ -20,6 +20,15 @@
     ul i.fa {
         width: 22px;
     }
+
+    h2 {
+        padding: 13px 10px 5px 10px;
+        margin: 0;
+        border-bottom: 1px solid $color-text-on-black;
+        font-size: 1rem;
+        font-weight: normal;
+        font-style: italic;
+    }
 }
 
 .header-logo {
@@ -38,14 +47,6 @@
 .header-menu {
     padding-top: 20px;
     flex: 1;
-}
-
-.sub-header {
-    .my-account {
-        padding: 10px;
-        margin: 0;
-        font-weight: bold;
-    }
 }
 
 .main-nav,

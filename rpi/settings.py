@@ -21,12 +21,18 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
-    'django.contrib.staticfiles'
+    'django.contrib.staticfiles',
+
+    # RPI apps
+    'rpi.user',
+    'rpi.beehive',
+    'rpi.pages',
+
+    'django.contrib.admin',
 ]
 
 MIDDLEWARE_CLASSES = [
