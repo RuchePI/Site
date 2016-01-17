@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block page_title %}Ajouter une ruche{% endblock %}
+
+{% block title_icon %}plus{% endblock %}
+
+{% block title %}Ajouter une ruche{% endblock %}
+
+{% block content %}
+    <p>Vous êtes sur le point d'ajouter une ruche personnelle.</p>
+
+    <p>Si votre ruche est publique, elle est alors visible par tout le monde. Toutefois, vous seul pouvez la modifier et la supprimer. Vous pourrez ajuster ce paramètre ultérieurement.</p>
+
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Ajouter</button>
+    </form>
+{% endblock %}

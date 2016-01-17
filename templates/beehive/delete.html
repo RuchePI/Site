@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block page_title %}Supprimer une ruche{% endblock %}
+
+{% block title_icon %}trash{% endblock %}
+
+{% block title %}Supprimer une ruche{% endblock %}
+
+{% block content %}
+    <p>Êtes-vous sûr de vouloir supprimer la ruche <strong>{{ beehive.name }}</strong> ? Ses données seront perdues et vous ne pourrez les récupérer.</p>
+
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button class="critical" type="submit">Supprimer</button>
+    </form>
+{% endblock %}

@@ -2,8 +2,8 @@
 
 import uuid
 
-from django.db import models
 from django.contrib.auth.models import User
+from django.db import models
 
 
 class Beehive(models.Model):
@@ -21,7 +21,7 @@ class Beehive(models.Model):
     owner = models.ForeignKey(User)
 
     public = models.BooleanField(
-        "La ruche est publique ?",
+        "La ruche est-elle publique ?",
         default=True,
     )
 

@@ -1,12 +1,13 @@
 # coding: utf-8
 
-from django.shortcuts import redirect, render
 from django.core.urlresolvers import reverse
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
+from django.shortcuts import redirect, render
 from django.views.generic import CreateView
 
+from rpi.beehive.models import Beehive
 from rpi.user.forms import LoginForm, RegisterForm, NewPasswordForm
 
 
@@ -49,12 +50,6 @@ class RegisterView(CreateView):
     model = User
     form_class = RegisterForm
     template_name = 'user/register.html'
-
-    def post(self, request, *args, **kwargs):
-        form = self.form_class(request.POST)
-        if form.is_valid():
-            return self.form_valid(form)
-        return render(request, self.template_name, {'form': form})
 
     def form_valid(self, form):
         User.objects.create_user(
@@ -99,6 +94,7 @@ def unregister_view(request):
 
     # If the user isn't the last.
     if not User.objects.count() == 1:
+        Beehive.objects.filter(owner=current).delete()
         User.objects.filter(pk=current.pk).delete()
     else:
         return render(request, 'user/unregister_fail.html')

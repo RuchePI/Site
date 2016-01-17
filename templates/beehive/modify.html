@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block page_title %}Modifier une ruche{% endblock %}
+
+{% block title_icon %}pencil{% endblock %}
+
+{% block title %}Modifier une ruche{% endblock %}
+
+{% block content %}
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Modifier</button>
+    </form>
+{% endblock %}

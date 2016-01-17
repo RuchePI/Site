@@ -26,8 +26,7 @@
         margin: 0;
         border-bottom: 1px solid $color-text-on-black;
         font-size: 1rem;
-        font-weight: normal;
-        font-style: italic;
+        font-weight: 300;
     }
 }
 
@@ -130,10 +129,6 @@
             transform: rotate(-90deg);
         }
     }
-}
-
-.sub-header {
-    margin-top: -1px;
 }
 
 .about {
