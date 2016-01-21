@@ -20,24 +20,21 @@ table {
         }
     }
 
-    form {
-        display: inline-block;
+    .delete {
+        color: initial;
+        margin: 0;
+        padding: 0;
+        background-color: transparent;
+        transition: all $transition-duration ease;
 
-        .delete {
-            color: initial;
-            margin: 0;
-            padding: 0;
+        &::after {
+            content: "\f1f8";
+            font-family: "FontAwesome";
+        }
+
+        &:hover {
+            color: $color-critical;
             background-color: transparent;
-            transition: all $transition-duration ease;
-
-            &::after {
-                content: "\f1f8";
-                font-family: "FontAwesome";
-            }
-
-            &:hover {
-                color: $color-critical;
-            }
         }
     }
 }

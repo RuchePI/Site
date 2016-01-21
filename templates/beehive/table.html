@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+
+{% block page_title %}Données de la ruche {{ current.name }}{% endblock %}
+
+{% block title_icon %}table{% endblock %}
+
+{% block title %}Données de la ruche <em>{{ current.name }}</em>{% endblock %}
+
+{% block content %}
+   {% if readerings %}
+        <table class="data-table full-width">
+            <thead>
+                <tr class="columns-names">
+                    <td colspan="2">Date</td>
+                    <td colspan="3">Température (°C)</td>
+                    <td colspan="2">Humidité (%)</td>
+                    <td>Masse (kg)</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td>extérieure</td>
+                    <td>intérieure</td>
+                    <td>essaim</td>
+                    <td>extérieure</td>
+                    <td>intérieure</td>
+                </tr>
+            </thead>
+            <tbody>
+                {% for r in readerings %}
+                    <tr>
+                        <td>{{ r.date|date:'d/m/y' }}</td>
+                        <td>{{ r.date|date:'H:i' }}</td>
+                        <td>{{ r.outdoor_temperature }}</td>
+                        <td>{{ r.indoor_temperature }}</td>
+                        <td>{{ r.swarm_temperature }}</td>
+                        <td>{{ r.outdoor_humidity }}</td>
+                        <td>{{ r.indoor_humidity }}</td>
+                        <td>{{ r.weigth }}</td>
+                        {% if r.beehive.owner == request.user or request.user.is_superuser %}
+                            <td><a href="{% url 'delete-readering' %}?id={{ r.pk }}" class="btn delete"></a></td>
+                        {% endif %}
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+       {% if is_paginated %}
+            <ul class="pagination">
+                {% if page_obj.has_previous %}
+                    <li><a href="?page={{ page_obj.previous_page_number }}">&larr; Précédente</a></li>
+                {% endif %}
+                <li><a class="current" href="#">Page {{ page_obj.number }} sur {{ page_obj.paginator.num_pages }}</a></li>
+                {% if page_obj.has_next %}
+                    <li><a href="?page={{ page_obj.next_page_number }}">Suivante &rarr;</a></li>
+                {% endif %}
+            </ul>
+        {% endif %}
+    {% else %}
+        <p>Cette ruche ne contient aucune donnée.</p>
+    {% endif %}
+{% endblock %}

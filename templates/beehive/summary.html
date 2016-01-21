@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block page_title %}Résumé de la ruche {{ current.name }}{% endblock %}
+
+{% block title_icon %}th{% endblock %}
+
+{% block title %}Résumé de la ruche <em>{{ current.name }}</em>{% endblock %}
+
+{% block content %}
+    <h2>Informations</h2>
+
+    <p><strong>Nom :</strong> {{ current.name }}</p>
+    <p><strong>Propriétaire :</strong> {{ current.owner.username }}</p>
+    <p><strong>Publique ?</strong> {% if current.public %}Oui{% else %}Non{% endif %}</p>
+    {% if current.owner == request.user or request.user.is_superuser %}
+       <p><strong>Jeton :</strong> <samp class="token">{{ current.token }}</samp><button class="token-button critical">Afficher</button></p>
+    {% endif %}
+{% endblock %}

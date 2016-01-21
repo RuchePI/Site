@@ -3,11 +3,11 @@
 from django.contrib.auth.decorators import login_required
 from django.core.exceptions import PermissionDenied
 from django.core.urlresolvers import reverse, reverse_lazy
-from django.shortcuts import get_object_or_404, redirect
+from django.shortcuts import get_object_or_404, redirect, render
 from django.utils.decorators import method_decorator
-from django.views.generic import CreateView, DeleteView, UpdateView
+from django.views.generic import CreateView, DeleteView, ListView, UpdateView
 
-from rpi.beehive.models import Beehive
+from rpi.beehive.models import Beehive, Readering
 from rpi.beehive.forms import BeehiveForm
 
 
@@ -79,3 +79,53 @@ class DeleteBeehiveView(DeleteView):
 
     def get_object(self, queryset=None):
         return get_object_or_404(Beehive, pk=self.kwargs['pk'])
+
+
+def summary_view(request, pk):
+    current = get_object_or_404(Beehive, pk=pk)
+
+    if current.owner != request.user and not request.user.is_superuser \
+            and not current.public:
+        raise PermissionDenied
+
+    return render(request, 'beehive/summary.html', {'current': current})
+
+
+class ListReaderingView(ListView):
+    """Makes the table with the beehive's readering and paginates it."""
+
+    model = Readering
+    context_object_name = 'readerings'
+    template_name = 'beehive/table.html'
+    paginate_by = 30
+
+    def dispatch(self, request, *args, **kwargs):
+        current = get_object_or_404(Beehive, pk=self.kwargs['pk'])
+        if current.owner != request.user and not request.user.is_superuser \
+                and not current.public:
+            raise PermissionDenied
+
+        return super(ListReaderingView, self).dispatch(request, *args,
+                                                       **kwargs)
+
+    def get_queryset(self):
+        return Readering.objects.filter(beehive__id=self.kwargs['pk'])
+
+    def get_context_data(self, *args, **kwargs):
+        context = super(ListReaderingView, self).get_context_data(*args,
+                                                                  **kwargs)
+        context['current'] = Beehive.objects.get(pk=self.kwargs['pk'])
+        return context
+
+
+def delete_readering_view(request):
+    """Deletes a readering passing in id arguments."""
+
+    current = get_object_or_404(Readering, pk=request.GET['id'])
+
+    if current.beehive.owner != request.user and not request.user.is_superuser:
+        raise PermissionDenied
+
+    current.delete()
+
+    return redirect(reverse('table', kwargs={'pk': current.beehive.pk}))
