@@ -88,7 +88,17 @@ def summary_view(request, pk):
             and not current.public:
         raise PermissionDenied
 
-    return render(request, 'beehive/summary.html', {'current': current})
+    try:
+        last_readering = Readering.objects.filter(beehive=current).latest('date')
+        last_readering.outdoor_humidity *= 100
+        last_readering.indoor_humidity *= 100
+    except Readering.DoesNotExist:
+        last_readering = None
+
+    return render(request, 'beehive/summary.html', {
+        'current': current,
+        'last_readering': last_readering
+    })
 
 
 class ListReaderingView(ListView):
@@ -109,7 +119,11 @@ class ListReaderingView(ListView):
                                                        **kwargs)
 
     def get_queryset(self):
-        return Readering.objects.filter(beehive__id=self.kwargs['pk'])
+        readerings = Readering.objects.filter(beehive__id=self.kwargs['pk'])
+        for r in readerings:
+            r.outdoor_humidity *= 100
+            r.indoor_humidity *= 100
+        return readerings
 
     def get_context_data(self, *args, **kwargs):
         context = super(ListReaderingView, self).get_context_data(*args,
