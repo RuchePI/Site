@@ -38,7 +38,7 @@
                         <td>{{ r.indoor_humidity }}</td>
                         <td>{{ r.weigth }}</td>
                         {% if r.beehive.owner == request.user or request.user.is_superuser %}
-                            <td><a href="{% url 'delete-readering' %}?id={{ r.pk }}" class="btn delete"></a></td>
+                            <td><a href="{% url 'delete-readering' r.pk %}" class="btn delete"></a></td>
                         {% endif %}
                     </tr>
                 {% endfor %}

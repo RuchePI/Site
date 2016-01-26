@@ -89,7 +89,8 @@ def summary_view(request, pk):
         raise PermissionDenied
 
     try:
-        last_readering = Readering.objects.filter(beehive=current).latest('date')
+        last_readering = Readering.objects.filter(beehive=current) \
+                                          .latest('date')
         last_readering.outdoor_humidity *= 100
         last_readering.indoor_humidity *= 100
     except Readering.DoesNotExist:
@@ -132,10 +133,10 @@ class ListReaderingView(ListView):
         return context
 
 
-def delete_readering_view(request):
+def delete_readering_view(request, pk):
     """Deletes a readering passing in id arguments."""
 
-    current = get_object_or_404(Readering, pk=request.GET['id'])
+    current = get_object_or_404(Readering, pk=pk)
 
     if current.beehive.owner != request.user and not request.user.is_superuser:
         raise PermissionDenied

@@ -13,6 +13,6 @@ urlpatterns = [
         name='modify-beehive'),
     url(r'^(?P<pk>\d+)/supprimer$', DeleteBeehiveView.as_view(),
         name='delete-beehive'),
-    url(r'^supprimer-releve/$', delete_readering_view,
+    url(r'^supprimer-releve/(?P<pk>\d+)$', delete_readering_view,
         name='delete-readering'),
 ]
