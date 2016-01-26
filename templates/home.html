@@ -7,7 +7,121 @@
 {% block title %}Page d'accueil{% endblock %}
 
 {% block content %}
-    <h2>Test</h2>
+    {% if personnal_beehives %}
+        <h2>Vos ruches</h2>
 
-    Contenu.
+        {% for b in personnal_beehives %}
+            {% if b.last_readering %}
+                <h3><em>{{ b.name }}</em>, le {{ b.last_readering.date|date:'d/m/y à H:m' }}</h3>
+
+                <div class="summary">
+                    <div class="info">
+                        <span class="info-icon"><i class="fa fa-fire"></i></span>
+                        <div class="info-content">
+                            <span class="info-text">Température extérieure</span>
+                            <span class="info-data">{{ b.last_readering.outdoor_temperature }} °C</span>
+                        </div>
+                    </div>
+                   <div class="info">
+                        <span class="info-icon"><i class="fa fa-fire"></i></span>
+                        <div class="info-content">
+                            <span class="info-text">Température intérieure</span>
+                            <span class="info-data">{{ b.last_readering.indoor_temperature }} °C</span>
+                        </div>
+                    </div>
+                    <div class="info">
+                        <span class="info-icon"><i class="fa fa-fire"></i></span>
+                        <div class="info-content">
+                            <span class="info-text">Température dans l'essaim</span>
+                            <span class="info-data">{{ b.last_readering.swarm_temperature }} °C</span>
+                        </div>
+                    </div>
+                    <div class="info">
+                        <span class="info-icon"><i class="fa fa-tint"></i></span>
+                        <div class="info-content">
+                            <span class="info-text">Humidité extérieure</span>
+                            <span class="info-data">{{ b.last_readering.outdoor_humidity }} %</span>
+                        </div>
+                    </div>
+                    <div class="info">
+                        <span class="info-icon"><i class="fa fa-tint"></i></span>
+                        <div class="info-content">
+                            <span class="info-text">Humidité intérieure</span>
+                            <span class="info-data">{{ b.last_readering.indoor_humidity }} %</span>
+                        </div>
+                    </div>
+                    <div class="info">
+                        <span class="info-icon"><i class="fa fa-balance-scale"></i></span>
+                        <div class="info-content">
+                            <span class="info-text">Masse</span>
+                            <span class="info-data">{{ b.last_readering.weigth }} kg</span>
+                        </div>
+                    </div>
+                </div>
+            {% else %}
+                <h3>{{ b.name }}</h3>
+
+                <p>Pas de données.</p>
+            {% endif %}
+        {% endfor %}
+    {% endif %}
+
+    {% if public_beehives %}
+        <h2>Autres ruches publiques</h2>
+
+        {% for b in public_beehives %}
+            {% if b.last_readering %}
+                <h3><em>{{ b.name }}</em>, le {{ b.last_readering.date|date:'d/m/y à H:m' }}</h3>
+
+                <div class="summary">
+                    <div class="info">
+                        <span class="info-icon"><i class="fa fa-fire"></i></span>
+                        <div class="info-content">
+                            <span class="info-text">Température extérieure</span>
+                            <span class="info-data">{{ b.last_readering.outdoor_temperature }} °C</span>
+                        </div>
+                    </div>
+                   <div class="info">
+                        <span class="info-icon"><i class="fa fa-fire"></i></span>
+                        <div class="info-content">
+                            <span class="info-text">Température intérieure</span>
+                            <span class="info-data">{{ b.last_readering.indoor_temperature }} °C</span>
+                        </div>
+                    </div>
+                    <div class="info">
+                        <span class="info-icon"><i class="fa fa-fire"></i></span>
+                        <div class="info-content">
+                            <span class="info-text">Température dans l'essaim</span>
+                            <span class="info-data">{{ b.last_readering.swarm_temperature }} °C</span>
+                        </div>
+                    </div>
+                    <div class="info">
+                        <span class="info-icon"><i class="fa fa-tint"></i></span>
+                        <div class="info-content">
+                            <span class="info-text">Humidité extérieure</span>
+                            <span class="info-data">{{ b.last_readering.outdoor_humidity }} %</span>
+                        </div>
+                    </div>
+                    <div class="info">
+                        <span class="info-icon"><i class="fa fa-tint"></i></span>
+                        <div class="info-content">
+                            <span class="info-text">Humidité intérieure</span>
+                            <span class="info-data">{{ b.last_readering.indoor_humidity }} %</span>
+                        </div>
+                    </div>
+                    <div class="info">
+                        <span class="info-icon"><i class="fa fa-balance-scale"></i></span>
+                        <div class="info-content">
+                            <span class="info-text">Masse</span>
+                            <span class="info-data">{{ b.last_readering.weigth }} kg</span>
+                        </div>
+                    </div>
+                </div>
+            {% else %}
+                <h3>{{ b.name }}</h3>
+
+                <p>Pas de données.</p>
+            {% endif %}
+        {% endfor %}
+    {% endif %}
 {% endblock %}

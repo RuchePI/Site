@@ -70,3 +70,6 @@ class Readering(models.Model):
         "Masse",
         validators=[MinValueValidator(0)],
     )
+
+    def __str__(self):
+        return '{} - {}'.format(self.date, self.beehive)
