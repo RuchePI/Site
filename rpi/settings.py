@@ -27,6 +27,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    'rest_framework',
+
     # RPI apps
     'rpi.user',
     'rpi.beehive',
@@ -112,6 +114,14 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
+
+
+# Django REST framework
+
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASS': ('rest_framework.permissions.AllowAny',),
+    'PAGINATE_BY': 30
+}
 
 
 # Static files (CSS, JavaScript, Images)

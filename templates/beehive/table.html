@@ -30,7 +30,7 @@
                 {% for r in readerings %}
                     <tr>
                         <td>{{ r.date|date:'d/m/y' }}</td>
-                        <td>{{ r.date|date:'H:i' }}</td>
+                        <td>{{ r.date|date:'H:i:s' }}</td>
                         <td>{{ r.outdoor_temperature }}</td>
                         <td>{{ r.indoor_temperature }}</td>
                         <td>{{ r.swarm_temperature }}</td>

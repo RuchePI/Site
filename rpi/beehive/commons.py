@@ -33,7 +33,7 @@ def get_last_readering(beehives):
 
     for b in beehives:
         b.last_readering = Readering.objects.filter(beehive=b) \
-                                            .order_by('-date').first()
+                                            .order_by('date').last()
         if b.last_readering is not None:
             b.last_readering.outdoor_humidity *= 100
             b.last_readering.indoor_humidity *= 100

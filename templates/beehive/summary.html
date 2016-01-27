@@ -8,7 +8,7 @@
 
 {% block content %}
     {% if last_readering %}
-        <h2>Dernier relevé, du {{ last_readering.date|date:'d/m/y à H:m' }}</h2>
+        <h2>Dernier relevé, du {{ last_readering.date|date:'d/m/y à H:i' }}</h2>
 
         <div class="summary">
             <div class="info">
@@ -63,6 +63,7 @@
     <p><strong>Nom :</strong> {{ current.name }}</p>
     <p><strong>Propriétaire :</strong> {{ current.owner.username }}</p>
     <p><strong>Publique ?</strong> {% if current.public %}Oui{% else %}Non{% endif %}</p>
+    <p><strong>Identificateur :</strong> {{ current.pk }}</p>
     {% if current.owner == request.user or request.user.is_superuser %}
        <p><strong>Jeton :</strong> <samp class="token">{{ current.token }}</samp><button class="token-button critical">Afficher</button></p>
     {% endif %}

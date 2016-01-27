@@ -120,7 +120,8 @@ class ListReaderingView(ListView):
                                                        **kwargs)
 
     def get_queryset(self):
-        readerings = Readering.objects.filter(beehive__id=self.kwargs['pk'])
+        readerings = Readering.objects.filter(beehive__id=self.kwargs['pk']) \
+                                      .order_by('-date')
         for r in readerings:
             r.outdoor_humidity *= 100
             r.indoor_humidity *= 100

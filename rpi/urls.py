@@ -1,4 +1,4 @@
-from django.conf.urls import url, include
+from django.conf.urls import include, url
 from django.contrib import admin
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.conf import settings
@@ -13,6 +13,11 @@ urlpatterns = [
     url(r'utilisateurs/', include('rpi.user.urls')),
     url(r'ruches/', include('rpi.beehive.urls')),
     url(r'^admin/', admin.site.urls),
+
+    # API
+    url(r'^api-auth/', include('rest_framework.urls',
+                               namespace='rest_framework')),
+    url(r'^api/', include('rpi.beehive.api.urls')),
 ]
 
 if settings.DEBUG:

@@ -3,6 +3,7 @@ from django.shortcuts import render
 from rpi.beehive.commons import get_personnal_and_public_beehives, \
     get_last_readering
 
+
 def home(request):
     """Display the home page with the last readering."""
 

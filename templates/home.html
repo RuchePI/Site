@@ -12,7 +12,7 @@
 
         {% for b in personnal_beehives %}
             {% if b.last_readering %}
-                <h3><em>{{ b.name }}</em>, le {{ b.last_readering.date|date:'d/m/y à H:m' }}</h3>
+                <h3><em>{{ b.name }}</em>, le {{ b.last_readering.date|date:'d/m/y à H:i' }}</h3>
 
                 <div class="summary">
                     <div class="info">
@@ -71,7 +71,7 @@
 
         {% for b in public_beehives %}
             {% if b.last_readering %}
-                <h3><em>{{ b.name }}</em>, le {{ b.last_readering.date|date:'d/m/y à H:m' }}</h3>
+                <h3><em>{{ b.name }}</em>, le {{ b.last_readering.date|date:'d/m/y à H:i' }}</h3>
 
                 <div class="summary">
                     <div class="info">
