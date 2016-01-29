@@ -17,7 +17,9 @@ var paths = {
         "node_modules/font-awesome/css/font-awesome.css"
     ],
     vendorsJS: [
-        "node_modules/jquery/dist/jquery.js"
+        "node_modules/jquery/dist/jquery.js",
+        "node_modules/highcharts/highcharts.src.js",
+        "node_modules/highcharts/modules/exporting.src.js"
     ],
     vendorsFonts: [
         "node_modules/font-awesome/fonts/*"
@@ -55,9 +57,7 @@ gulp.task("stylesheet", ["vendors-css"], function () {
             cascade: true
         }))
         .pipe(gulp.dest(path.join(paths.sourceDir, "css/")))
-        .pipe($.rename({
-            suffix: ".min"
-        }))
+        .pipe($.rename({ suffix: ".min" }))
         .pipe($.minifyCss())
         .pipe(gulp.dest(path.join(paths.sourceDir, "css/")))
         .pipe($.livereload());
@@ -79,15 +79,13 @@ gulp.task("vendors-js", function () {
 gulp.task("scripts", ["vendors-js"], function () {
     gulp.src([
         /* The order is critical! */
-        path.join(paths.sourceDir, paths.scriptsDir, "vendors/*.js"),
+        path.join(paths.sourceDir, paths.scriptsDir, "vendors/{jquery,highcharts.src,exporting.src}.js"),
         path.join(paths.sourceDir, paths.scriptsDir, "*.js"),
         "!" + path.join(paths.sourceDir, paths.scriptsDir, "{all,all.min}.js")
     ])
         .pipe($.concat("all.js", { newLine: "\r\n\r\n" }))
         .pipe(gulp.dest(path.join(paths.sourceDir, paths.scriptsDir)))
-        .pipe($.rename({
-            suffix: ".min"
-        }))
+        .pipe($.rename({ suffix: ".min" }))
         .pipe($.uglify().on("error", $.notify.onError({
             title: "Javascript Error",
             message: "<%= error.message %>"

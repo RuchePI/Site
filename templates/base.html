@@ -33,16 +33,23 @@
                 <nav class="header-menu">
                     <ul class="main-nav">
                         <li><a href="{% url 'home' %}"><i class="fa fa-home"></i>Accueil</a></li>
-                        {% with beehives=user|beehives %}
-                            {# Personnal beehives. #}
-                            <h2>Vos ruches</h2>
+                        {% if user.is_authenticated %}
+                            <li><a href="{% url 'add-beehive' %}"><i class="fa fa-plus"></i>Ajouter une ruche</a></li>
+                        {% endif %}
+                    </ul>
+
+                    {% with beehives=user|beehives %}
+                        {# Personnal beehives. #}
+                        <h2>Vos ruches</h2>
+                        <ul class="main-nav">
                             {% for b in beehives.personnal %}
                                 <li>
                                     <a href="{% url 'summary' b.pk %}" class="has-dropdown"><i class="fa fa-forumbee"></i>{{ b.name }}<i class="visibility fa fa-{% if b.public %}un{% endif %}lock"></i></a>
                                     <ul class="dropdown">
                                         <li><a href="{% url 'summary' b.pk %}"><i class="fa fa-th"></i>Résumé</a></li>
                                         <li><a href="{% url 'table' b.pk %}"><i class="fa fa-table"></i>Données</a></li>
-                                        <li><a href="#"><i class="fa fa-line-chart"></i>Graphiques</a></li>
+                                        <li><a href="{% url 'charts' b.pk %}"><i class="fa fa-line-chart"></i>Graphiques</a></li>
+                                        <li><a href="{% url 'export' b.pk %}"><i class="fa fa-file-text"></i>Exporter</a></li>
                                         <li><a href="{% url 'modify-beehive' b.pk %}"><i class="fa fa-pencil"></i>Modifier</a></li>
                                         <li><a href="{% url 'delete-beehive' b.pk %}"><i class="fa fa-trash"></i>Supprimer</a></li>
                                     </ul>
@@ -50,16 +57,19 @@
                             {% empty %}
                                 <li><a href="#">Aucune ruche à vous.</a></li>
                             {% endfor %}
+                        </ul>
 
-                            {# Public beehives. #}
-                            <h2>Autres ruches publques</h2>
+                        {# Public beehives. #}
+                        <h2>Autres ruches publques</h2>
+                        <ul class="main-nav">
                             {% for b in beehives.public %}
                                 <li>
                                     <a href="{% url 'summary' b.pk %}" class="has-dropdown"><i class="fa fa-forumbee"></i>{{ b.name }}{% if user.is_superuser %}<i class="visibility fa fa-{% if not b.public %}un{% endif %}lock"></i>{% endif %}</a>
                                     <ul class="dropdown">
                                         <li><a href="{% url 'summary' b.pk %}"><i class="fa fa-th"></i>Résumé</a></li>
                                         <li><a href="{% url 'table' b.pk %}"><i class="fa fa-table"></i>Données</a></li>
-                                        <li><a href="#"><i class="fa fa-line-chart"></i>Graphiques</a></li>
+                                        <li><a href="{% url 'charts' b.pk %}"><i class="fa fa-line-chart"></i>Graphiques</a></li>
+                                        <li><a href="{% url 'export' b.pk %}"><i class="fa fa-file-text"></i>Exporter</a></li>
                                         {% if user.is_superuser %}
                                             <li><a href="{% url 'modify-beehive' b.pk %}"><i class="fa fa-pencil"></i>Modifier</a></li>
                                             <li><a href="{% url 'delete-beehive' b.pk %}"><i class="fa fa-trash"></i>Supprimer</a></li>
@@ -69,11 +79,8 @@
                             {% empty %}
                                 <li><a href="#">Aucune ruche publique.</a></li>
                             {% endfor %}
-                        {% endwith %}
-                        {% if user.is_authenticated %}
-                            <li><a href="{% url 'add-beehive' %}"><i class="fa fa-plus"></i>Ajouter une ruche</a></li>
-                        {% endif %}
-                    </ul>
+                        </ul>
+                    {% endwith %}
                 </nav>
                 <div class="sub-header">
                     {% if user.is_authenticated %}
@@ -110,7 +117,7 @@
             </main>
         </div>
 
-        <script src="{% static 'js/all.min.js' %}"></script>
         {% block scripts %}{% endblock %}
+        <script src="{% static 'js/all.min.js' %}"></script>
     </body>
 </html>

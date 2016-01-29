@@ -7,4 +7,4 @@
         $(this).toggleClass("active");
     });
 
-})(jQuery);
+}(jQuery));

@@ -15,6 +15,7 @@
                     <td colspan="3">Température (°C)</td>
                     <td colspan="2">Humidité (%)</td>
                     <td>Masse (kg)</td>
+                    <td></td>
                 </tr>
                 <tr>
                     <td></td>
@@ -24,6 +25,8 @@
                     <td>essaim</td>
                     <td>extérieure</td>
                     <td>intérieure</td>
+                    <td></td>
+                    <td></td>
                 </tr>
             </thead>
             <tbody>
@@ -57,6 +60,6 @@
             </ul>
         {% endif %}
     {% else %}
-        <p>Cette ruche ne contient aucune donnée.</p>
+        <p class="error">Cette ruche ne contient aucune donnée.</p>
     {% endif %}
 {% endblock %}

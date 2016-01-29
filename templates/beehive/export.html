@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block page_title %}Exporter la ruche {{ current.name }}{% endblock %}
+
+{% block title_icon %}file-text{% endblock %}
+
+{% block title %}Exporter la ruche <em>{{ current.name }}</em>{% endblock %}
+
+{% block content %}
+    <p class="info">Par défaut, les dates de début et fin sont respectivement hier et aujourd'hui.</p>
+
+    {% if errors %}
+        <ul class="errorlist" style="margin-bottom: 1em">
+            {% for e in errors %}
+                <li>{{ e }}</li>
+            {% endfor %}
+        </ul>
+   {% endif %}
+
+    <h2>Format CSV</h2>
+
+    <p><em>Comma Separated Value</em> : pour pouvoir retraiter les données avec un tableur.</p>
+
+    <form method="get" action=".">
+        <input type="hidden" name="format" value="csv">
+        <p>
+            <label>Période</label>
+            du
+            <input type="text" name="from" placeholder="JJ-MM-AA" value="{{ from }}">
+            au
+            <input type="text" name="to" placeholder="JJ-MM-AA" value="{{ to }}">.
+        </p>
+        <p>
+            <label for="separator">Délimiteur</label>
+            <input type="text" name="delimiter" value="{{ delimiter }}">
+        </p>
+        <p>
+            <label for="separator">Separateur décimal</label>
+            <input type="text" name="decimal_separator" value="{{ decimal_separator }}">
+        </p>
+        <button type="submit">Exporter</button>
+    </form>
+{% endblock %}

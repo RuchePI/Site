@@ -22,6 +22,7 @@
   },
   "dependencies": {
     "font-awesome": "^4.3.0",
+    "highcharts": "^4.2.1",
     "jquery": "^2.1.4",
     "normalize.css": "^3.0.3"
   }

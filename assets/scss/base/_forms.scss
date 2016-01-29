@@ -5,7 +5,8 @@ label {
 
 input[type=text],
 input[type=password],
-input[type=number] {
+input[type=number],
+input[type=date] {
     display: inline-block;
     border: none medium #fff;
     border-bottom: 1px solid #ddd;
@@ -50,6 +51,12 @@ button,
     &:hover {
         background-color: $color-tertiary;
         color: #fff;
+    }
+
+    &.inline-btn {
+        display: inline;
+        float: none;
+        margin-left: 10px
     }
 }
 

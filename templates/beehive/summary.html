@@ -55,7 +55,7 @@
             </div>
         </div>
     {% else %}
-        <p>Pas de données.</p>
+        <p class="error">Pas de données.</p>
     {% endif %}
 
     <h2>Informations</h2>
@@ -65,6 +65,6 @@
     <p><strong>Publique ?</strong> {% if current.public %}Oui{% else %}Non{% endif %}</p>
     <p><strong>Identificateur :</strong> {{ current.pk }}</p>
     {% if current.owner == request.user or request.user.is_superuser %}
-       <p><strong>Jeton :</strong> <samp class="token">{{ current.token }}</samp><button class="token-button critical">Afficher</button></p>
+        <p><strong>Jeton :</strong> <samp class="token">{{ current.token }}</samp><button class="token-button critical">Afficher</button></p>
     {% endif %}
 {% endblock %}

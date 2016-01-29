@@ -11,4 +11,4 @@
         $("html").removeClass("show-mobile-menu");
     });
 
-})(jQuery);
+}(jQuery));

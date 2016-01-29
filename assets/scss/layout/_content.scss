@@ -45,6 +45,22 @@ main {
     h3 {
         font-weight: normal;
     }
+
+    p.info::before,
+    p.error::before {
+        font-family: "FontAwesome";
+        margin-right: 5px;
+    }
+
+    p.info::before {
+        content: "\f05a";
+        color: $color-info;
+    }
+
+    p.error::before {
+        content: "\f071";
+        color: $color-critical;
+    }
 }
 
 .full-width {

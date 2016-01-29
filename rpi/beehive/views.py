@@ -1,12 +1,16 @@
 # coding: utf-8
 
+import csv
+
 from django.contrib.auth.decorators import login_required
 from django.core.exceptions import PermissionDenied
 from django.core.urlresolvers import reverse, reverse_lazy
+from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.utils.decorators import method_decorator
 from django.views.generic import CreateView, DeleteView, ListView, UpdateView
 
+from rpi.beehive.commons import get_readerings_interval
 from rpi.beehive.models import Beehive, Readering
 from rpi.beehive.forms import BeehiveForm
 
@@ -32,7 +36,7 @@ class AddBeehiveView(CreateView):
             current.public = True
         current.save()
 
-        return redirect(reverse('home'))
+        return redirect(reverse('summary', args=[current.pk]))
 
 
 class ModifyBeehiveView(UpdateView):
@@ -132,6 +136,133 @@ class ListReaderingView(ListView):
                                                                   **kwargs)
         context['current'] = Beehive.objects.get(pk=self.kwargs['pk'])
         return context
+
+
+class ChartReaderingView(ListReaderingView):
+    """Makes the charts."""
+
+    template_name = 'beehive/charts.html'
+    paginate_by = None
+
+    def get_queryset(self):
+        """Gets the readerings of a period."""
+
+        readerings, _, _, _ = get_readerings_interval(self.kwargs['pk'],
+                                                      self.request)
+        for r in readerings:
+            r.outdoor_humidity *= 100
+            r.indoor_humidity *= 100
+
+        return readerings
+
+    def get_context_data(self, *args, **kwargs):
+        context = super(ChartReaderingView, self).get_context_data(*args,
+                                                                   **kwargs)
+
+        _, errors, from_date, to_date = get_readerings_interval(
+            self.kwargs['pk'], self.request
+        )
+        context['errors'] = errors
+        context['from_date'] = from_date
+        context['to_date'] = to_date
+
+        if 'from' in self.request.GET.keys():
+            context['arg_from'] = self.request.GET['from']
+        if 'to' in self.request.GET.keys():
+            context['arg_to'] = self.request.GET['to']
+
+        return context
+
+
+def export_view(request, pk):
+    """Exports the readerings of a beehive."""
+
+    current = get_object_or_404(Beehive, pk=pk)
+
+    if current.owner != request.user and not request.user.is_superuser:
+        raise PermissionDenied
+
+    readerings, errors, _, _ = get_readerings_interval(pk, request)
+
+    if 'from' in request.GET.keys():
+        from_date = request.GET['from']
+    else:
+        from_date = ''
+    if 'to' in request.GET.keys():
+        to_date = request.GET['to']
+    else:
+        to_date = ''
+
+    if ('format' in request.GET.keys()):
+        # CSV export.
+        if request.GET['format'] == 'csv':
+            if ('delimiter' in request.GET.keys()):
+                if request.GET['delimiter'] != '':
+                    if len(request.GET['delimiter']) == 1:
+                        delimiter = request.GET['delimiter']
+                    else:
+                        errors.append("Le délimiteur doit faire un seul "
+                                      "caractère.")
+                else:
+                    errors.append("Un délimiteur doit être renseigné.")
+                delimiter = request.GET['delimiter']
+            else:
+                delimiter = ''
+
+            if 'decimal_separator' in request.GET.keys():
+                if request.GET['decimal_separator'] != '':
+                    decimal_separator = request.GET['decimal_separator']
+                else:
+                    errors.append("Un séparateur décimal doit être renseigné.")
+                decimal_separator = request.GET['decimal_separator']
+            else:
+                decimal_separator = ''
+
+            def format_float(number):
+                return str(number).replace('.', decimal_separator)
+
+            if errors:
+                return render(request, 'beehive/export.html', {
+                    'current': current,
+                    'errors': errors,
+                    'from': from_date,
+                    'to': to_date,
+                    'delimiter': delimiter,
+                    'decimal_separator': decimal_separator
+                })
+
+            # Make the file.
+            response = HttpResponse(content_type='text/csv')
+            response['Content-Disposition'] = 'attachment; ' \
+                'filename="beehive_{}.csv'.format(pk)
+
+            writer = csv.writer(response, delimiter=delimiter)
+            writer.writerow([
+                "Date",
+                "Température extérieure (°C)",
+                "Température intérieure (°C)",
+                "Température dans l'essaim (°C)",
+                "Humidité intérieure (%)",
+                "Humidité extérieure (%)",
+                "Masse (kg)"
+            ])
+
+            for r in readerings:
+                writer.writerow([
+                    '{}/{}/{} {}:{}:{}'.format(r.date.day, r.date.month,
+                                               r.date.year, r.date.hour,
+                                               r.date.minute, r.date.second),
+                    format_float(r.outdoor_temperature),
+                    format_float(r.indoor_temperature),
+                    format_float(r.swarm_temperature),
+                    format_float(r.outdoor_humidity),
+                    format_float(r.indoor_humidity),
+                    format_float(r.weigth)
+                ])
+
+            return response
+
+    return render(request, 'beehive/export.html', {'current': current})
 
 
 def delete_readering_view(request, pk):
