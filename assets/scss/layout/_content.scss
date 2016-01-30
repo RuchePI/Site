@@ -37,19 +37,25 @@ main {
             padding-right: 5px;
         }
 
-        &:first-of-type {
+        &:first-of-type:not(.not-first) {
             margin-top: 0;
         }
     }
 
     h3 {
         font-weight: normal;
+
+        &.col-title {
+            margin-top: 0;
+        }
     }
 
-    p.info::before,
-    p.error::before {
-        font-family: "FontAwesome";
-        margin-right: 5px;
+    p.info,
+    p.error {
+        &::before {
+            font-family: "FontAwesome";
+            margin-right: 5px;
+        }
     }
 
     p.info::before {
@@ -141,12 +147,12 @@ main {
     &:not(.show) {
         max-width: 0;
 
-        + .token-button {
+        + .token-btn {
             margin: 0;
         }
     }
 
-    &-button {
+    &-btn {
         display: inline;
         float: none;
         margin: 0 0 0 10px;
@@ -178,17 +184,13 @@ main {
         text-overflow: ellipsis;
     }
 
-    .sumary {
-        .info {
-            flex: 1 1 50%;
+    .sumary .info {
+        flex: 1 1 50%;
 
-            &:nth-child(2n) + .info {
-                &,
-                + .info {
-                    margin-top: 5px;
-                }
-
-                border-left: medium none #fff;
+        &:nth-child(2n) + .info {
+            &,
+            + .info {
+                margin-top: 5px;
             }
         }
     }

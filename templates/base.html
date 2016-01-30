@@ -100,7 +100,7 @@
                             <li><a href="{% url 'register-user' %}"><i class="fa fa-user-plus"></i>Créer un compte</a></li>
                             <li><a href="{% url 'login' %}"><i class="fa fa-sign-in"></i>Connexion</a></li>
                         {% endif %}
-                        <li><a href="#"><i class="fa fa-question-circle"></i>À propos</a></li>
+                        <li><a href="{% url 'about' %}"><i class="fa fa-question-circle"></i>À propos</a></li>
                     </ul>
                     <p class="about"><a href="{{ app.repository }}">Code source</a> du site.</p>
                 </div>

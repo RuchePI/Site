@@ -2,7 +2,7 @@
 
     "use strict";
 
-    $(".token-button").click(function (e) {
+    $(".token-btn").click(function (e) {
         e.preventDefault();
 
         var token = $(this).prev(".token");

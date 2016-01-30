@@ -15,3 +15,7 @@ def home(request):
         'personnal_beehives': beehives['personnal_beehives'],
         'public_beehives': beehives['public_beehives']
     })
+
+
+def about_view(request):
+    return render(request, 'pages/about.html')
