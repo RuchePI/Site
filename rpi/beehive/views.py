@@ -257,7 +257,7 @@ def export_view(request, pk):
                     format_float(r.swarm_temperature),
                     format_float(r.outdoor_humidity),
                     format_float(r.indoor_humidity),
-                    format_float(r.weigth)
+                    format_float(r.weight)
                 ])
 
             return response

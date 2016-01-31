@@ -10,8 +10,9 @@
             chart: {
                 backgroundColor: "transparent",
                 style: {
-                    fontFamily: "\"Open Sans\", Helvetica, Arial, sans-serif"
-                }
+                    fontFamily: "inherit"
+                },
+                zoomType: "x"
             },
             credits: {
                 enabled: false
@@ -20,12 +21,13 @@
                 text: ""
             },
             xAxis: {
-                categories: readerings.dates,
+                type: "datetime",
                 labels: {
                     formatter: function () {
                         return Highcharts.dateFormat("%d/%m/%y<br>%H:%M:%S", this.value);
                     }
-                }
+                },
+                minTickInterval: 60 * 60 * 1000
             },
             legend: {
                 layout: "vertical",
@@ -35,7 +37,6 @@
             },
             tooltip: {
                 borderWidth: 0
-
             }
         });
 
@@ -48,7 +49,7 @@
             },
             tooltip: {
                 formatter: function () {
-                    return Highcharts.dateFormat("%d/%m/%Y à %H:%M:%S", new Date(this.x)) + "<br><strong>" + this.series.name + " :</strong> " + this.y + " °C";
+                    return Highcharts.dateFormat("%d/%m/%Y à %H:%M:%S", new Date(this.x)) + "<br><strong>" + this.series.name + " :</strong> " + this.y.toFixed(2).replace(".", ",") + " °C";
                 }
             },
             series: [{
@@ -90,7 +91,7 @@
         });
 
         /* Weigth chart. */
-        $("#weigth_chart").highcharts({
+        $("#weight_chart").highcharts({
             yAxis: {
                 title: {
                     text: "Masse (kg)"
@@ -107,7 +108,7 @@
             series: [{
                 name: "globale",
                 color: "#3c8dbc",
-                data: readerings.weigth
+                data: readerings.weight
             }]
         });
 

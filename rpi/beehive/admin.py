@@ -14,7 +14,7 @@ class ReaderingAdmin(admin.ModelAdmin):
 
     list_display = ('pk', 'date', 'beehive', 'outdoor_temperature',
                     'indoor_temperature', 'swarm_temperature',
-                    'outdoor_humidity', 'indoor_humidity', 'weigth')
+                    'outdoor_humidity', 'indoor_humidity', 'weight')
 
 
 admin.site.register(Beehive, BeehiveAdmin)

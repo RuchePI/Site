@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 
 {% load l10n %}
+{% load date_js %}
 
 {% block page_title %}Graphiques de la ruche {{ current.name }}{% endblock %}
 
@@ -34,7 +35,7 @@
 
 
     {% if readerings %}
-        <h2>Températures</h2>
+        <h2 class="not-first">Températures</h2>
 
         <div id="temperatures_chart"></div>
 
@@ -44,7 +45,7 @@
 
         <h2>Masse</h2>
 
-        <div id="weigth_chart"></div>
+        <div id="weight_chart"></div>
     {% else %}
         <p class="error">Cette ruche ne contient aucune donnée sur cette période.</p>
     {% endif %}
@@ -55,26 +56,23 @@
     {% if readerings %}
         <script>
             var readerings = {
-                dates: [
-                    {% for r in readerings %}Date.UTC({{ r.date|date:'Y, m'}} - 1, {{ r.date|date:'d, H, i, s'}}), {% endfor %}
-                ],
                 indoorTemperatures: [
-                    {% for r in readerings %}{{ r.outdoor_temperature|unlocalize }}, {% endfor %}
+                    {% for r in readerings %}[{{ r.date|date_js }}, {{ r.indoor_temperature|unlocalize }}], {% endfor %}
                 ],
                 outdoorTemperatures: [
-                    {% for r in readerings %}{{ r.indoor_temperature|unlocalize }}, {% endfor %}
+                    {% for r in readerings %}[{{ r.date|date_js }}, {{ r.outdoor_temperature|unlocalize }}], {% endfor %}
                 ],
                 swarmTemperatures: [
-                    {% for r in readerings %}{{ r.swarm_temperature|unlocalize }}, {% endfor %}
+                    {% for r in readerings %}[{{ r.date|date_js }}, {{ r.swarm_temperature|unlocalize }}], {% endfor %}
                 ],
                 indoorHumidities: [
-                    {% for r in readerings %}{{ r.indoor_humidity|unlocalize }}, {% endfor %}
+                    {% for r in readerings %}[{{ r.date|date_js }}, {{ r.indoor_humidity|unlocalize }}], {% endfor %}
                 ],
                 outdoorHumidities: [
-                    {% for r in readerings %}{{ r.outdoor_humidity|unlocalize }}, {% endfor %}
+                    {% for r in readerings %}[{{ r.date|date_js }}, {{ r.outdoor_humidity|unlocalize }}], {% endfor %}
                 ],
-                weigth: [
-                    {% for r in readerings %}{{ r.weigth|unlocalize }}, {% endfor %}
+                weight: [
+                    {% for r in readerings %}[{{ r.date|date_js }}, {{ r.weight|unlocalize }}], {% endfor %}
                 ]
             };
         </script>

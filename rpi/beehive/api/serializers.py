@@ -10,4 +10,4 @@ class ReaderingSerializer(serializers.ModelSerializer):
         model = Readering
         fields = ('outdoor_temperature', 'indoor_temperature',
                   'swarm_temperature', 'outdoor_humidity', 'indoor_humidity',
-                  'weigth')
+                  'weight')

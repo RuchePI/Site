@@ -15,46 +15,48 @@
                 <span class="info-icon"><i class="fa fa-fire"></i></span>
                 <div class="info-content">
                     <span class="info-text">Température extérieure</span>
-                    <span class="info-data">{{ last_readering.outdoor_temperature }} °C</span>
+                    <span class="info-data">{{ last_readering.outdoor_temperature|floatformat }} °C</span>
                 </div>
             </div>
            <div class="info">
                 <span class="info-icon"><i class="fa fa-fire"></i></span>
                 <div class="info-content">
                     <span class="info-text">Température intérieure</span>
-                    <span class="info-data">{{ last_readering.indoor_temperature }} °C</span>
+                    <span class="info-data">{{ last_readering.indoor_temperature|floatformat }} °C</span>
                 </div>
             </div>
             <div class="info">
                 <span class="info-icon"><i class="fa fa-fire"></i></span>
                 <div class="info-content">
                     <span class="info-text">Température dans l'essaim</span>
-                    <span class="info-data">{{ last_readering.swarm_temperature }} °C</span>
+                    <span class="info-data">{{ last_readering.swarm_temperature|floatformat }} °C</span>
                 </div>
             </div>
             <div class="info">
                 <span class="info-icon"><i class="fa fa-tint"></i></span>
                 <div class="info-content">
                     <span class="info-text">Humidité extérieure</span>
-                    <span class="info-data">{{ last_readering.outdoor_humidity }} %</span>
+                    <span class="info-data">{{ last_readering.outdoor_humidity|floatformat }} %</span>
                 </div>
             </div>
             <div class="info">
                 <span class="info-icon"><i class="fa fa-tint"></i></span>
                 <div class="info-content">
                     <span class="info-text">Humidité intérieure</span>
-                    <span class="info-data">{{ last_readering.indoor_humidity }} %</span>
+                    <span class="info-data">{{ last_readering.indoor_humidity|floatformat }} %</span>
                 </div>
             </div>
             <div class="info">
                 <span class="info-icon"><i class="fa fa-balance-scale"></i></span>
                 <div class="info-content">
                     <span class="info-text">Masse</span>
-                    <span class="info-data">{{ last_readering.weigth }} kg</span>
+                    <span class="info-data">{{ last_readering.weight|floatformat }} kg</span>
                 </div>
             </div>
         </div>
     {% else %}
+        <h2>Dernier relevé</h2>
+
         <p class="error">Pas de données.</p>
     {% endif %}
 
@@ -65,6 +67,6 @@
     <p><strong>Publique ?</strong> {% if current.public %}Oui{% else %}Non{% endif %}</p>
     <p><strong>Identificateur :</strong> {{ current.pk }}</p>
     {% if current.owner == request.user or request.user.is_superuser %}
-        <p><strong>Jeton :</strong> <samp class="token">{{ current.token }}</samp><button class="token-button critical">Afficher</button></p>
+        <p><strong>Jeton :</strong> <samp class="token">{{ current.token }}</samp><button class="token-btn critical">Afficher</button></p>
     {% endif %}
 {% endblock %}

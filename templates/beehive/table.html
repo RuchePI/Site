@@ -34,12 +34,12 @@
                     <tr>
                         <td>{{ r.date|date:'d/m/y' }}</td>
                         <td>{{ r.date|date:'H:i:s' }}</td>
-                        <td>{{ r.outdoor_temperature }}</td>
-                        <td>{{ r.indoor_temperature }}</td>
-                        <td>{{ r.swarm_temperature }}</td>
-                        <td>{{ r.outdoor_humidity }}</td>
-                        <td>{{ r.indoor_humidity }}</td>
-                        <td>{{ r.weigth }}</td>
+                        <td>{{ r.outdoor_temperature|floatformat }}</td>
+                        <td>{{ r.indoor_temperature|floatformat }}</td>
+                        <td>{{ r.swarm_temperature|floatformat }}</td>
+                        <td>{{ r.outdoor_humidity|floatformat }}</td>
+                        <td>{{ r.indoor_humidity|floatformat }}</td>
+                        <td>{{ r.weight|floatformat }}</td>
                         {% if r.beehive.owner == request.user or request.user.is_superuser %}
                             <td><a href="{% url 'delete-readering' r.pk %}" class="btn delete"></a></td>
                         {% endif %}

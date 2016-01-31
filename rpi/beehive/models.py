@@ -66,7 +66,7 @@ class Readering(models.Model):
         validators=[MinValueValidator(0), MaxValueValidator(1)],
     )
 
-    weigth = models.FloatField(
+    weight = models.FloatField(
         "Masse",
         validators=[MinValueValidator(0)],
     )
