@@ -53,13 +53,13 @@ def get_readerings_interval(pk, request):
         try:
             from_date = datetime.strptime(request.GET['from'], '%d-%m-%y') \
                                 .date()
-        except:
+        except ValueError:
             errors.append("La date du début n'est pas correcte.")
     if ('to' in request.GET.keys()) and not (request.GET['to'] == ''):
         try:
             to_date = datetime.strptime(request.GET['to'], '%d-%m-%y') \
                               .date()
-        except:
+        except ValueError:
             errors.append("La date de fin n'est pas correcte.")
 
     return (

@@ -2,6 +2,13 @@
 
     "use strict";
 
+    function tooltipText(t, unit) {
+        return Highcharts.dateFormat("<i>%d/%m/%Y à %H:%M:%S</i>", new Date(t.x)) +
+            "<br><span style=\"font-weight: bold; color: " +
+            t.series.options.color + "\">" + t.series.name + " :</span> " +
+            t.y.toFixed(2).replace(".", ",").replace("-", "−") + " " + unit;
+    }
+
     /* Test if readerings variable exists. */
     if (typeof readerings !== "undefined") {
 
@@ -17,6 +24,9 @@
             credits: {
                 enabled: false
             },
+            lang: {
+                decimalPoint: ","
+            },
             title: {
                 text: ""
             },
@@ -29,14 +39,23 @@
                 },
                 minTickInterval: 60 * 60 * 1000
             },
+            yAxis: {
+                labels: {
+                    formatter: function () {
+                        return this.value.toString().replace("-", "−");
+                    }
+                }
+            },
             legend: {
                 layout: "vertical",
                 align: "right",
-                verticalAlign: "middle",
-                borderWidth: 0
+                verticalAlign: "middle"
             },
             tooltip: {
-                borderWidth: 0
+                useHTML: true,
+                backgroundColor: "#fafafa",
+                borderColor: "#ddd",
+                shadow: false
             }
         });
 
@@ -49,7 +68,7 @@
             },
             tooltip: {
                 formatter: function () {
-                    return Highcharts.dateFormat("%d/%m/%Y à %H:%M:%S", new Date(this.x)) + "<br><strong>" + this.series.name + " :</strong> " + this.y.toFixed(2).replace(".", ",") + " °C";
+                    return tooltipText(this, "°C");
                 }
             },
             series: [{
@@ -76,7 +95,7 @@
             },
             tooltip: {
                 formatter: function () {
-                    return Highcharts.dateFormat("%d/%m/%Y à %H:%M:%S", new Date(this.x)) + "<br><strong>" + this.series.name + " :</strong> " + this.y + " %";
+                    return tooltipText(this, "%");
                 }
             },
             series: [{
@@ -90,7 +109,7 @@
             }]
         });
 
-        /* Weigth chart. */
+        /* Weight chart. */
         $("#weight_chart").highcharts({
             yAxis: {
                 title: {
@@ -102,7 +121,7 @@
             },
             tooltip: {
                 formatter: function () {
-                    return Highcharts.dateFormat("%d/%m/%Y à %H:%M:%S", new Date(this.x)) + "<br><strong>" + this.series.name + " :</strong> " + this.y + " kg";
+                    return tooltipText(this, "kg");
                 }
             },
             series: [{

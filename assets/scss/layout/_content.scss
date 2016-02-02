@@ -136,6 +136,22 @@ main {
     }
 }
 
+.properties {
+    dt {
+        display: inline-block;
+        width: 20%;
+        margin-right: 10px;
+        font-weight: bold;
+        text-align: right;
+    }
+
+    dd {
+        display: inline-block;
+        width: calc(80% - 10px);
+        margin: 0 0 5px 0;
+    }
+}
+
 .token {
     display: inline-block;
     max-width: 500px;
@@ -192,6 +208,16 @@ main {
             + .info {
                 margin-top: 5px;
             }
+        }
+    }
+
+    .properties {
+        dt {
+            width: 45%;
+        }
+
+        dd {
+            width: calc(55% - 10px);
         }
     }
 }

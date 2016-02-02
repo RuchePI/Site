@@ -34,12 +34,24 @@
     display: block;
     flex: 0;
     padding-top: 15px;
+    font-weight: 300;
+    font-size: 1.5em;
     color: #fff;
     text-align: center;
 
-    .header-logo-link img {
-        margin-right: 10px;
-        vertical-align: middle;
+    .header-logo-link {
+        display: block;
+        width: 100%;
+
+        img {
+            margin-right: 10px;
+            vertical-align: middle;
+            transition: all $transition-duration ease;
+        }
+
+        &:hover img {
+            transform: rotate(60deg);
+        }
     }
 }
 

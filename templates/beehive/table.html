@@ -1,5 +1,7 @@
 {% extends "base.html" %}
 
+{% load number_format %}
+
 {% block page_title %}Données de la ruche {{ current.name }}{% endblock %}
 
 {% block title_icon %}table{% endblock %}
@@ -34,12 +36,12 @@
                     <tr>
                         <td>{{ r.date|date:'d/m/y' }}</td>
                         <td>{{ r.date|date:'H:i:s' }}</td>
-                        <td>{{ r.outdoor_temperature|floatformat }}</td>
-                        <td>{{ r.indoor_temperature|floatformat }}</td>
-                        <td>{{ r.swarm_temperature|floatformat }}</td>
-                        <td>{{ r.outdoor_humidity|floatformat }}</td>
-                        <td>{{ r.indoor_humidity|floatformat }}</td>
-                        <td>{{ r.weight|floatformat }}</td>
+                        <td>{{ r.outdoor_temperature|numberformat }}</td>
+                        <td>{{ r.indoor_temperature|numberformat }}</td>
+                        <td>{{ r.swarm_temperature|numberformat }}</td>
+                        <td>{{ r.outdoor_humidity|numberformat }}</td>
+                        <td>{{ r.indoor_humidity|numberformat }}</td>
+                        <td>{{ r.weight|numberformat }}</td>
                         {% if r.beehive.owner == request.user or request.user.is_superuser %}
                             <td><a href="{% url 'delete-readering' r.pk %}" class="btn delete"></a></td>
                         {% endif %}
