@@ -49,21 +49,21 @@ main {
             margin-top: 0;
         }
     }
+}
 
-    p.info,
-    p.error {
-        &::before {
-            font-family: "FontAwesome";
-            margin-right: 5px;
-        }
+p {
+    &.info::before,
+    &.error::before {
+        font-family: "FontAwesome";
+        margin-right: 5px;
     }
 
-    p.info::before {
+    &.info::before {
         content: "\f05a";
         color: $color-info;
     }
 
-    p.error::before {
+    &.error::before {
         content: "\f071";
         color: $color-critical;
     }
@@ -100,6 +100,7 @@ main {
 
         .info-content {
             flex: 1;
+            text-align: center;
 
             .info-text {
                 font-weight: bold;
@@ -211,13 +212,14 @@ main {
         }
     }
 
-    .properties {
-        dt {
-            width: 45%;
-        }
+    .properties dt,
+    .properties dd {
+        display: block;
+        width: 100%;
+        text-align: left;
+    }
 
-        dd {
-            width: calc(55% - 10px);
-        }
+    .properties dd {
+        margin-left: 10px;
     }
 }

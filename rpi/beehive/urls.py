@@ -7,7 +7,7 @@ from rpi.beehive.views import AddBeehiveView, delete_readering_view, \
 
 urlpatterns = [
     url(r'^ajouter$', AddBeehiveView.as_view(), name='add-beehive'),
-    url(r'^(?P<pk>\d+)/voir/$', summary_view, name='summary'),
+    url(r'^(?P<pk>\d+)/$', summary_view, name='summary'),
     url(r'^(?P<pk>\d+)/voir/tableau/$', ListReaderingView.as_view(),
         name='table'),
     url(r'^(?P<pk>\d+)/voir/graphiques/$', ChartReaderingView.as_view(),

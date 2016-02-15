@@ -42,9 +42,11 @@
                         <td>{{ r.outdoor_humidity|numberformat }}</td>
                         <td>{{ r.indoor_humidity|numberformat }}</td>
                         <td>{{ r.weight|numberformat }}</td>
-                        {% if r.beehive.owner == request.user or request.user.is_superuser %}
-                            <td><a href="{% url 'delete-readering' r.pk %}" class="btn delete"></a></td>
-                        {% endif %}
+                        <td>
+                            {% if r.beehive.owner == request.user or request.user.is_superuser %}
+                                <a href="{% url 'delete-readering' r.pk %}" class="delete"></a>
+                            {% endif %}
+                        </td>
                     </tr>
                 {% endfor %}
             </tbody>

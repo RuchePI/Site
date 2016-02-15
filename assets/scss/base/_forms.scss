@@ -39,7 +39,7 @@ button,
     padding: 10px;
     border: none medium #fff;
     border-radius: 3px;
-    background-color: #ffe246; // $color-secondary, but bug!
+    background-color: $color-secondary;
     cursor: pointer;
     transition: all $transition-duration ease;
 

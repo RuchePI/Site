@@ -6,7 +6,7 @@ from rpi.beehive.models import Beehive
 from rpi.beehive.api.serializers import ReaderingSerializer
 
 
-@api_view(['POST', ])
+@api_view(['POST', ])  # Authorizes only POST requests.
 def readering_detail(request, pk):
     """Creates a readering."""
 
