@@ -39,10 +39,39 @@ sudo pip3 install -r requirements.txt
 On lance ensuite le serveur en ayant pris soin de créer la base de données et le compte super-utilisateur.
 
 ```
+python3 manage.py makemigrations beehive
 python3 manage.py migrate
 python3 manage.py createsuperuser
 python3 manage.py runserver
 ```
+
+## Installation en production
+
+Il faut suivre les mêmes étapes que précedemment. Ensuite, on créé un ficher `rpi/settings_prod.py` avec le contenu suivant, la clé secrète et le mot de passe de la base sont à changer. Ici, la configuration est pour PythonAnywhere.
+
+```python
+# Prod settings
+
+SECRET_KEY = ''
+
+DEBUG = False
+
+ALLOWED_HOSTS = [RPI_APP['domain'], ]
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'HOST': 'RuchePI.mysql.pythonanywhere-services.com',
+        'NAME': 'RuchePI$rpi',
+        'USER': 'RuchePI',
+        'PASSWORD': '',
+    }
+}
+```
+
+Une clé secrète peut être générée avec le script `tools/gen_secret_key.py`.
+
+Ensuite, on configure nginx et le serveur WSGI. Ne pas oublier de déservir les fichiers statiques qui se trouvent dans `assets/`.
 
 ## Bonnes pratiques
 

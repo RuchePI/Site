@@ -142,7 +142,7 @@ RPI_APP = {
                    u"connaître à distance les conditions intérieures et "
                    u"extérieures de ses ruches.",
     'abbr': u"rpi",
-    'domain': u"ruchepi.xyz",
+    'domain': u"ruchepi.pythonanywhere.com",
     'repository': u"https://github.com/RuchePI/Site",
 }
 
