@@ -179,7 +179,8 @@ def export_view(request, pk):
 
     current = get_object_or_404(Beehive, pk=pk)
 
-    if current.owner != request.user and not request.user.is_superuser:
+    if current.owner != request.user and not request.user.is_superuser \
+            and not current.public:
         raise PermissionDenied
 
     readerings, errors, _, _ = get_readerings_interval(pk, request)
